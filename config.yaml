@@ -1,0 +1,14 @@
+---
+cog_bundle_version: 4
+name: datadog
+description: Interact with datadog graphs
+version: 0.1.0
+docker:
+  image: cogcmd/datadog
+  tag: 0.1.0
+commands:
+  dashboard-list:
+    executable: "/home/bundle/cog-command"
+    description: Lists dashboards
+    rules:
+    - allow
