@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk -U add ca-certificates libssh2 ruby ruby-json && \
+RUN apk -U add ca-certificates libssh2 ruby ruby-json ruby-bigdecimal && \
     rm -f /var/cache/apk/*
 
 # Setup bundle user and directory

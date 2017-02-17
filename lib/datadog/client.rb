@@ -12,4 +12,9 @@ class Datadog::Client
     status, json = client.get_dashboards
     json["dashes"]
   end
+
+  def show_graph(query, from, to)
+    status, json = client.graph_snapshot(query, from, to)
+    [json]
+  end
 end

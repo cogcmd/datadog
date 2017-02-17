@@ -12,3 +12,14 @@ commands:
     description: Lists dashboards
     rules:
     - allow
+  graph:
+    executable: "/home/bundle/cog-command"
+    description: Generates a graph from a metric query
+    rules:
+    - allow
+templates:
+  graph:
+    body: |
+      ~each var=$results as=graph~
+      ~$graph.snapshot_url~
+      ~end~
