@@ -15,6 +15,7 @@ class Datadog::Client
 
   def show_graph(query, from, to)
     status, json = client.graph_snapshot(query, from, to)
+    sleep 1 # give datadog some time to generate the image
     [json]
   end
 end
