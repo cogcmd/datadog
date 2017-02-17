@@ -13,9 +13,14 @@ class Datadog::Client
     json["dashes"]
   end
 
+  def search_metrics(query)
+    status, json = client.search(query)
+    json["results"]["metrics"].map { |metric| { name: metric } }
+  end
+
   def show_graph(query, from, to)
     status, json = client.graph_snapshot(query, from, to)
-    sleep 1 # give datadog some time to generate the image
+    sleep 2 # give datadog some time to generate the image
     [json]
   end
 end

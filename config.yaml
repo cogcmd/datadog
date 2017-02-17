@@ -12,12 +12,22 @@ commands:
     description: Lists dashboards
     rules:
     - allow
+  metrics-search:
+    executable: "/home/bundle/cog-command"
+    description: Search for metrics
+    rules:
+    - allow
   graph:
     executable: "/home/bundle/cog-command"
     description: Generates a graph from a metric query
     rules:
     - allow
 templates:
+  metrics_search:
+    body: |
+      ~each var=$results as=metric~
+      * ~$metric.name~
+      ~end~
   graph:
     body: |
       ~each var=$results as=graph~
