@@ -1,9 +1,10 @@
 require 'cog_cmd/datadog/dashboard'
+require 'datadog/command'
 
 module CogCmd::Datadog::Dashboard
-  class List < Cog::Command
+  class List < Datadog::Command
     def run_command
-      response.content = [{name: 'test_dashboard'}]
+      response.content = client.list_dashboards
     end
   end
 end
