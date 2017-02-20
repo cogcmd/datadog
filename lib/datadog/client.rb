@@ -1,3 +1,4 @@
+require 'net/http'
 require 'datadog'
 require 'dogapi'
 
@@ -18,9 +19,15 @@ class Datadog::Client
     json["results"]["metrics"].map { |metric| { name: metric } }
   end
 
-  def show_graph(query, from, to)
+  def show_graph(query, from, to, block_until_image = true)
     status, json = client.graph_snapshot(query, from, to)
-    sleep 2 # give datadog some time to generate the image
+
+    # Wait for the snapshot url to return image data. If we return too quickly
+    # here, Slack will unfurl an empty image.
+    until Net::HTTP.get(URI.parse(json["snapshot_url"])).length > 179
+      sleep 0.5
+    end
+
     [json]
   end
 end
