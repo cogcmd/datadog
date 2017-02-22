@@ -10,11 +10,13 @@ commands:
   dashboard-list:
     executable: "/home/bundle/cog-command"
     description: Lists dashboards
+    arguments: "[time-range] <snapshot-query>"
     rules:
     - allow
-  metrics-search:
+  metric-search:
     executable: "/home/bundle/cog-command"
     description: Search for metrics
+    arguments: "<metric-name>"
     rules:
     - allow
   graph:
@@ -23,7 +25,7 @@ commands:
     rules:
     - allow
 templates:
-  metrics_search:
+  metric_search:
     body: |
       ~each var=$results as=metric~
       * ~$metric.name~
