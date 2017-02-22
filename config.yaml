@@ -7,12 +7,6 @@ docker:
   image: cogcmd/datadog
   tag: 0.1.0
 commands:
-  dashboard-list:
-    executable: "/home/bundle/cog-command"
-    description: Lists dashboards
-    arguments: "[time-range] <snapshot-query>"
-    rules:
-    - allow
   metric-search:
     executable: "/home/bundle/cog-command"
     description: Search for metrics
@@ -22,6 +16,7 @@ commands:
   graph:
     executable: "/home/bundle/cog-command"
     description: Generates a graph from a metric query
+    arguments: "[time-range] <snapshot-query>"
     rules:
     - allow
 templates:

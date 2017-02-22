@@ -1,4 +1,4 @@
-require 'cog_cmd/datadog/dashboard'
+require 'cog_cmd/datadog/metric'
 require 'datadog/command'
 
 module CogCmd::Datadog::Metric
