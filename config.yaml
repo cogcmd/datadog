@@ -16,7 +16,7 @@ commands:
   graph:
     executable: "/home/bundle/cog-command"
     description: Generates a graph from a metric query
-    arguments: "[time-range] <snapshot-query>"
+    arguments: "[start-time] [end-time] <snapshot-query>"
     rules:
     - allow
 templates:

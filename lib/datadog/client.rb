@@ -17,7 +17,7 @@ class Datadog::Client
   end
 
   def show_graph(query, from, to)
-    status, json = client.graph_snapshot(query, from, to)
+    status, json = client.graph_snapshot(query, from.to_i, to.to_i)
 
     # Wait for the snapshot url to return image data. If we return too quickly
     # here, Slack will unfurl an empty image.
