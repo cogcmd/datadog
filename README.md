@@ -8,4 +8,4 @@ A monitoring and analytics platform for IT infrastructure, operations and develo
 
 # Example
 
-![DataDog Usage](https://raw.githubusercontent.com/cogcmd/datadog/master/usage.png)
+![Datadog Usage](https://raw.githubusercontent.com/cogcmd/datadog/master/usage.png)

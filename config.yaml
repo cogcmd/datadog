@@ -1,18 +1,18 @@
 ---
 cog_bundle_version: 4
 name: datadog
-description: DataDog Graphs in Chat
-version: 0.2.0
+description: Datadog Graphs in Chat
+version: 0.2.1
 docker:
   image: cogcmd/datadog
-  tag: 0.2.0
+  tag: 0.2.1
 author: Operable <support@operable.io>
 homepage: https://github.com/cogcmd/datadog
 long_description: |
-  Do you want to generate DataDog graphs from chat? Well here ya go. This
+  Do you want to generate Datadog graphs from chat? Well here ya go. This
   bundle only focuses on posting graphs generated from snapshot queries. You
   can lookup metrics and then graph them and nothing more. You'll need an API
-  key and Application key to authenticate with DataDog[1]. And, you'll also need
+  key and Application key to authenticate with Datadog[1]. And, you'll also need
   to be familiar with the graph query syntax for generating graphs[2].
 
   [1] https://app.datadoghq.com/account/settings#api
@@ -20,9 +20,9 @@ long_description: |
 config:
   env:
   - var: DATADOG_API_KEY
-    description: "API key of your DataDog account. Generate a new one here: https://app.datadoghq.com/account/settings#api"
+    description: "API key of your Datadog account. Generate a new one here: https://app.datadoghq.com/account/settings#api"
   - var: DATADOG_APPLICATION_KEY
-    description: "Application key of your DataDog account. Generate a new one here: https://app.datadoghq.com/account/settings#api"
+    description: "Application key of your Datadog account. Generate a new one here: https://app.datadoghq.com/account/settings#api"
 commands:
   metric-search:
     executable: "/home/bundle/cog-command"
@@ -43,7 +43,7 @@ commands:
       "avg:system.load.1{*}", "avg" is the aggregation, "system.load.1" is the
       metric and "{*}" is the scope. You can search for specific metrics with
       the `metric search` command. And, you can read more about the query
-      syntax in DataDog's documentation: https://help.datadoghq.com/hc/en-us/articles/204820019-Graphing-with-Datadog-from-the-query-to-the-graph
+      syntax in Datadog's documentation: https://help.datadoghq.com/hc/en-us/articles/204820019-Graphing-with-Datadog-from-the-query-to-the-graph
 
       By default, the start time is one hour ago and the end time is now.
       However, you can optionall specify your own start and end times. Start
