@@ -19,13 +19,13 @@ class Datadog::Command < Cog::Command
 
   def require_api_key!
     unless api_key
-      raise(Cog::Abort, "`DATADOG_API_KEY` not set.")
+      raise(Cog::Abort, "`DATADOG_API_KEY` not set. Generate a new API key here: https://app.datadoghq.com/account/settings#api")
     end
   end
 
   def require_application_key!
     unless application_key
-      raise(Cog::Abort, "`DATADOG_APPLICATION_KEY` not set.")
+      raise(Cog::Abort, "`DATADOG_APPLICATION_KEY` not set. Generate a new Application key here: https://app.datadoghq.com/account/settings#api")
     end
   end
 end

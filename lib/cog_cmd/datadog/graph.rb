@@ -41,10 +41,11 @@ module CogCmd::Datadog
       return unless unparsed_end_time
 
       @end_time = relative_end_time(unparsed_end_time) ||
-        unix_timestamp(unparsed_end_time)
+        unix_timestamp(unparsed_end_time) ||
+        now(unparsed_end_time)
 
       unless @end_time
-        raise(Cog::Abort, 'Failed to parse end time. End time must be a shorthand positive amount relative to the start time (1h, 30m, 60s) or a unix timestamp (1487784076).')
+        raise(Cog::Abort, 'Failed to parse end time. End time must be a shorthand positive amount relative to the start time (1h, 30m, 60s), a unix timestamp (1487784076), or "now" for the current time.')
       end
     end
 
@@ -85,6 +86,10 @@ module CogCmd::Datadog
       return false if seconds < EARLIEST_START_TIME
 
       return Time.at(seconds)
+    end
+
+    def now(time)
+      time == "now" && Time.now
     end
   end
 end

@@ -1,22 +1,78 @@
 ---
 cog_bundle_version: 4
 name: datadog
-description: Interact with datadog graphs
-version: 0.1.0
+description: DataDog Graphs in Chat
+version: 0.2.0
 docker:
   image: cogcmd/datadog
-  tag: 0.1.0
+  tag: 0.2.0
+author: Operable <support@operable.io>
+homepage: https://github.com/cogcmd/datadog
+long_description: |
+  Do you want to generate DataDog graphs from chat? Well here ya go. This
+  bundle only focuses on posting graphs generated from snapshot queries. You
+  can lookup metrics and then graph them and nothing more. You'll need an API
+  key and Application key to authenticate with DataDog[1]. And, you'll also need
+  to be familiar with the graph query syntax for generating graphs[2].
+
+  [1] https://app.datadoghq.com/account/settings#api
+  [2] https://help.datadoghq.com/hc/en-us/articles/204820019-Graphing-with-Datadog-from-the-query-to-the-graph
+config:
+  env:
+  - var: DATADOG_API_KEY
+    description: "API key of your DataDog account. Generate a new one here: https://app.datadoghq.com/account/settings#api"
+  - var: DATADOG_APPLICATION_KEY
+    description: "Application key of your DataDog account. Generate a new one here: https://app.datadoghq.com/account/settings#api"
 commands:
   metric-search:
     executable: "/home/bundle/cog-command"
     description: Search for metrics
-    arguments: "<metric-name>"
+    arguments: "<query>"
+    examples: |
+      Search for metrics containing the phrase "system.load":
+      metric search system.load
     rules:
     - allow
   graph:
     executable: "/home/bundle/cog-command"
     description: Generates a graph from a metric query
     arguments: "[start-time] [end-time] <snapshot-query>"
+    long_description: |
+      Graph metrics over a period of time. Snapshot queries are formed using an
+      aggregation, metric and scope. For instance, for the query
+      "avg:system.load.1{*}", "avg" is the aggregation, "system.load.1" is the
+      metric and "{*}" is the scope. You can search for specific metrics with
+      the `metric search` command. And, you can read more about the query
+      syntax in DataDog's documentation: https://help.datadoghq.com/hc/en-us/articles/204820019-Graphing-with-Datadog-from-the-query-to-the-graph
+
+      By default, the start time is one hour ago and the end time is now.
+      However, you can optionall specify your own start and end times. Start
+      times may be specified as negative shorthand amounts relative to now or
+      unix timestamps. For instance, "-1h" means the start time will be 1 hour
+      ago. End times can specificed as positive shorthand amounts relative to
+      the start time, unix timestamps, or the string "now". For instance, "30m"
+      means the end time will be 30 minutes after the start time.
+
+      The following time units are accepted in shorthand times:
+        * d - day
+        * h - hour
+        * m - minute
+        * s - second
+    examples: |
+      Graph load average for the last hour across all hosts:
+      graph avg:system.load.1{*}
+
+      Graph load average for the same time range yesterday:
+      graph "-1d" avg:system.load.1{*}
+
+      Graph load average over 10 minutes 2 hours ago:
+      graph "-2h" "10m" avg:system.load.1{*}
+
+      Graph load average over the last 24 hours:
+      graph "-1d" now avg:system.load.1{*}
+
+      Graph load average for a specific time range:
+      graph 1487612717 1487781855 avg:system.load.1{*}
     rules:
     - allow
 templates:
